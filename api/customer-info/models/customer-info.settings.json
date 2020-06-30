@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customer_info",
+  "info": {
+    "name": "customer_info"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "fist_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "identification_id": {
+      "type": "integer"
+    },
+    "date_of_birth": {
+      "type": "date"
+    }
+  }
+}

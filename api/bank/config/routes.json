@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/interest-rates",
-      "handler": "interest-rate.find",
+      "path": "/banks",
+      "handler": "bank.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/interest-rates/count",
-      "handler": "interest-rate.count",
+      "path": "/banks/count",
+      "handler": "bank.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.findOne",
+      "path": "/banks/:id",
+      "handler": "bank.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/interest-rates",
-      "handler": "interest-rate.create",
+      "path": "/banks",
+      "handler": "bank.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.update",
+      "path": "/banks/:id",
+      "handler": "bank.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.delete",
+      "path": "/banks/:id",
+      "handler": "bank.delete",
       "config": {
         "policies": []
       }

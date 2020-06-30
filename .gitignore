@@ -10,7 +10,7 @@ Icon
 .Trashes
 ._*
 
-
+.yarn.lock
 ############################
 # Linux
 ############################
@@ -94,7 +94,7 @@ logs
 results
 node_modules
 .node_history
-
+yarn.lock
 
 ############################
 # Tests

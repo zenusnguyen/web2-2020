@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "identification",
+  "info": {
+    "name": "identification"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "identification_type": {
+      "type": "integer"
+    },
+    "identification_detail": {
+      "type": "integer"
+    }
+  }
+}
