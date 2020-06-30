@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/identification-types",
+      "handler": "identification-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/identification-types/count",
+      "handler": "identification-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/identification-types/:id",
+      "handler": "identification-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/identification-types",
+      "handler": "identification-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/identification-types/:id",
+      "handler": "identification-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/identification-types/:id",
+      "handler": "identification-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

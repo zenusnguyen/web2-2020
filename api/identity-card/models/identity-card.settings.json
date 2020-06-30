@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "identity_card",
+  "connection": "default",
+  "info": {
+    "name": "identity-card"
+  },
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "date_of_issue": {
+      "type": "date"
+    },
+    "type": {
+      "type": "integer"
+    },
+    "image1": {
+      "type": "string"
+    },
+    "image2": {
+      "type": "string"
+    }
+  }
+}

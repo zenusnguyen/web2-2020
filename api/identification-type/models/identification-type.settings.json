@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "identification_type",
+  "connection": "default",
+  "info": {
+    "name": "identification-type"
+  },
+  "attributes": {
+    "type": {
+      "type": "string"
+    }
+  }
+}
