@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/customer-accounts/auth",
+      "handler": "customer-accounts.auth",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

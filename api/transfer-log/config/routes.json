@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/transfer-logs",
+      "handler": "transfer-log.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/transfer-logs/count",
+      "handler": "transfer-log.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/transfer-logs/:id",
+      "handler": "transfer-log.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/transfer-logs",
+      "handler": "transfer-log.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/transfer-logs/:id",
+      "handler": "transfer-log.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/transfer-logs/:id",
+      "handler": "transfer-log.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

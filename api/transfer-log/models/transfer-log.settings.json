@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transfer_log",
+  "info": {
+    "name": "transfer_log"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "beneficiary_account": {
+      "type": "string"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "beneficiary_bank": {
+      "type": "string"
+    }
+  }
+}

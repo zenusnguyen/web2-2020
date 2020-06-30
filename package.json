@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "knex": "<0.20.0",
     "pg": "^8.2.1",
     "sqlite3": "latest",
