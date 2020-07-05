@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/customer-infos",
-      "handler": "customer-info.find",
+      "path": "/customer-infors",
+      "handler": "customer-infor.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/customer-infos/count",
-      "handler": "customer-info.count",
+      "path": "/customer-infors/count",
+      "handler": "customer-infor.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/customer-infos/:id",
-      "handler": "customer-info.findOne",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/customer-infos",
-      "handler": "customer-info.create",
+      "path": "/customer-infors",
+      "handler": "customer-infor.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/customer-infos/:id",
-      "handler": "customer-info.update",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/customer-infos/:id",
-      "handler": "customer-info.delete",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.delete",
       "config": {
         "policies": []
       }

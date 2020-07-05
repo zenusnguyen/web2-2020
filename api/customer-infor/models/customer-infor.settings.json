@@ -1,18 +1,15 @@
 {
   "kind": "collectionType",
-  "collectionName": "customer_info",
+  "collectionName": "customer_infor",
   "info": {
-    "name": "customer_info"
+    "name": "customer_infor"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "fist_name": {
-      "type": "string"
-    },
-    "last_name": {
+    "full_name": {
       "type": "string"
     },
     "phone_number": {
@@ -21,11 +18,20 @@
     "address": {
       "type": "string"
     },
-    "identification_id": {
-      "type": "integer"
-    },
     "date_of_birth": {
       "type": "date"
+    },
+    "identificationNumber": {
+      "type": "string"
+    },
+    "date_of_issue": {
+      "type": "date"
+    },
+    "img1": {
+      "type": "string"
+    },
+    "img2": {
+      "type": "string"
     }
   }
 }
