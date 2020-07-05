@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/identification-types",
-      "handler": "identification-type.find",
+      "path": "/banks",
+      "handler": "bank.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/identification-types/count",
-      "handler": "identification-type.count",
+      "path": "/banks/count",
+      "handler": "bank.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/identification-types/:id",
-      "handler": "identification-type.findOne",
+      "path": "/banks/:id",
+      "handler": "bank.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/identification-types",
-      "handler": "identification-type.create",
+      "path": "/banks",
+      "handler": "bank.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/identification-types/:id",
-      "handler": "identification-type.update",
+      "path": "/banks/:id",
+      "handler": "bank.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/identification-types/:id",
-      "handler": "identification-type.delete",
+      "path": "/banks/:id",
+      "handler": "bank.delete",
       "config": {
         "policies": []
       }

@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/interest-rates",
-      "handler": "interest-rate.find",
+      "path": "/currency-units",
+      "handler": "currency-unit.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/interest-rates/count",
-      "handler": "interest-rate.count",
+      "path": "/currency-units/count",
+      "handler": "currency-unit.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.findOne",
+      "path": "/currency-units/:id",
+      "handler": "currency-unit.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/interest-rates",
-      "handler": "interest-rate.create",
+      "path": "/currency-units",
+      "handler": "currency-unit.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.update",
+      "path": "/currency-units/:id",
+      "handler": "currency-unit.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/interest-rates/:id",
-      "handler": "interest-rate.delete",
+      "path": "/currency-units/:id",
+      "handler": "currency-unit.delete",
       "config": {
         "policies": []
       }

@@ -10,7 +10,7 @@ Icon
 .Trashes
 ._*
 
-
+.yarn.lock
 ############################
 # Linux
 ############################
@@ -75,7 +75,8 @@ $RECYCLE.BIN/
 ############################
 # Misc.
 ############################
-
+.build
+build
 *#
 ssl
 .idea
@@ -94,7 +95,7 @@ logs
 results
 node_modules
 .node_history
-
+yarn.lock
 
 ############################
 # Tests
