@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customer_infor",
+  "info": {
+    "name": "customer_infor"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "full_name": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "date_of_birth": {
+      "type": "date"
+    },
+    "identificationNumber": {
+      "type": "string"
+    },
+    "date_of_issue": {
+      "type": "date"
+    },
+    "img1": {
+      "type": "string"
+    },
+    "img2": {
+      "type": "string"
+    }
+  }
+}
