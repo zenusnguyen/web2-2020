@@ -19,75 +19,74 @@ module.exports = {
     return data;
   },
   async transferIntra(ctx) {
-    console.log("ctx: ", ctx.request.body);
+    // console.log("ctx: ", ctx.request.body);
     try {
-      const data = ctx.request.body;
+      const requestData = await ctx.request.body.data;
 
-      const currentAccount = await strapi.query("spend-account").findOne({
-        card_number: data.currentAccount,
-      });
-      // console.log("currentAccount: ", currentAccount);
+      const currentAccount = await strapi
+        .query("spend-account")
+        .findOne({ card_number: requestData.currentAccount.toString() });
+      console.log("currentAccount: ", currentAccount);
       const beneficiaryAccount = await strapi.query("spend-account").findOne({
-        card_number: data.beneficiaryAccount,
+        card_number: requestData.beneficiaryAccount.toString(),
       });
+      console.log("beneficiaryAccount: ", beneficiaryAccount);
+      if (beneficiaryAccount == null) {
+        return ctx.badRequest("beneficiaryAccount not found");
+      }
       // console.log("beneficiaryAccount: ", beneficiaryAccount);
       const transfer = await strapi.query("spend-account").update(
         { id: currentAccount.id },
         {
-          balance: parseInt(currentAccount.balance) - parseInt(data.amount),
+          balance:
+            parseInt(currentAccount.balance) - parseInt(requestData.amount),
         }
       );
 
       const deposit = await strapi.query("spend-account").update(
         { id: beneficiaryAccount.id },
         {
-          balance: parseInt(beneficiaryAccount.balance) + parseInt(data.amount),
+          balance:
+            parseInt(beneficiaryAccount.balance) + parseInt(requestData.amount),
         }
       );
-      console.log("deposit: ", deposit);
+      // console.log("deposit: ", deposit);
       // console.log("transfer: ", transfer);
       // log transfer
       const transfer_log = await strapi.query("transfer-log").create({
-        source_account: data.currentAccount,
-        beneficiary_account: data.beneficiaryAccount,
-        remark: data.remark,
-        beneficiary_bank: data.beneficiaryBank || "yellowBank",
+        source_account: requestData.currentAccount,
+        beneficiary_account: requestData.beneficiaryAccount,
+        remark: requestData.remark,
+        beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
-      console.log("transfer_log: ", transfer_log);
+      // console.log("transfer_log: ", transfer_log);
       const transaction_transfer = await strapi
         .query("transaction-log")
         .create({
           transaction_type: "transfer",
-          amount: data.amount,
-          account_id: data.currentAccount,
+          amount: requestData.amount,
+          account_id: requestData.currentAccount,
           log_detail: transfer_log.id,
         });
-      console.log("transaction_transfer: ", transaction_transfer);
+      // console.log("transaction_transfer: ", transaction_transfer);
       // log deposit -
       const deposit_log = await strapi.query("deposit-log").create({
-        fromAccount: data.currentAccount,
-        fromBank: data.sourceBank || "yellowBank",
-        toAccount: data.beneficiaryAccount,
-        toBank: data.beneficiaryBank || "yellowBank",
+        fromAccount: requestData.currentAccount,
+        fromBank: requestData.sourceBank || "yellowBank",
+        toAccount: requestData.beneficiaryAccount,
+        toBank: requestData.beneficiaryBank || "yellowBank",
       });
-      console.log("deposit_log: ", deposit_log);
+      // console.log("deposit_log: ", deposit_log);
       const transaction_deposit = await strapi.query("transaction-log").create({
         transaction_type: "deposit",
-        amount: data.amount,
-        account_id: data.beneficiaryAccount,
+        amount: requestData.amount,
+        account_id: requestData.beneficiaryAccount,
         log_detail: deposit_log.id,
       });
-      console.log("transaction_deposit: ", transaction_deposit);
+      // console.log("transaction_deposit: ", transaction_deposit);
     } catch (error) {
-      console.log(error);
+      return ctx.badRequest(error.message);
     }
-    const result = "asdas ";
-
-    // const data = await strapi
-    //   .query("spend-account")
-    //   .find({ account_id: ctx.query.id });
-
-    // return data;
-    return result;
+    return "success";
   },
 };
