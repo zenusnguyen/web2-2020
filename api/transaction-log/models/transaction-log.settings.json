@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transaction_log",
+  "info": {
+    "name": "transaction_log"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "transaction_type": {
+      "type": "string"
+    },
+    "log_detail": {
+      "type": "integer"
+    },
+    "account_id": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "float"
+    }
+  }
+}

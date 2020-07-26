@@ -1,24 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "transfer_log",
+  "collectionName": "deposit_log",
   "info": {
-    "name": "transfer_log"
+    "name": "deposit_log"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "beneficiary_account": {
+    "fromAccount": {
       "type": "string"
     },
-    "remark": {
+    "fromBank": {
       "type": "string"
     },
-    "beneficiary_bank": {
+    "toAccount": {
       "type": "string"
     },
-    "source_account": {
+    "toBank": {
       "type": "string"
     }
   }
