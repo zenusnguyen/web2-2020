@@ -26,15 +26,15 @@ module.exports = {
       const currentAccount = await strapi
         .query("spend-account")
         .findOne({ card_number: requestData.currentAccount.toString() });
-      console.log("currentAccount: ", currentAccount);
+
       const beneficiaryAccount = await strapi.query("spend-account").findOne({
         card_number: requestData.beneficiaryAccount.toString(),
       });
-      console.log("beneficiaryAccount: ", beneficiaryAccount);
+
       if (beneficiaryAccount == null) {
         return ctx.badRequest("beneficiaryAccount not found");
       }
-      // console.log("beneficiaryAccount: ", beneficiaryAccount);
+
       const transfer = await strapi.query("spend-account").update(
         { id: currentAccount.id },
         {
@@ -50,16 +50,15 @@ module.exports = {
             parseInt(beneficiaryAccount.balance) + parseInt(requestData.amount),
         }
       );
-      // console.log("deposit: ", deposit);
-      // console.log("transfer: ", transfer);
-      // log transfer
+
+      // log transfer -
       const transfer_log = await strapi.query("transfer-log").create({
         source_account: requestData.currentAccount,
         beneficiary_account: requestData.beneficiaryAccount,
         remark: requestData.remark,
         beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
-      // console.log("transfer_log: ", transfer_log);
+
       const transaction_transfer = await strapi
         .query("transaction-log")
         .create({
@@ -68,8 +67,8 @@ module.exports = {
           account_id: requestData.currentAccount,
           log_detail: transfer_log.id,
         });
-      // console.log("transaction_transfer: ", transaction_transfer);
-      // log deposit -
+
+      // log transfer +
       const deposit_log = await strapi.query("deposit-log").create({
         fromAccount: requestData.currentAccount,
         fromBank: requestData.sourceBank || "yellowBank",

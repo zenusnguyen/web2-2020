@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/transaction-logs-by-account",
+      "handler": "transaction-log.findByOwner",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/transaction-logs/:id",
       "handler": "transaction-log.findOne",
       "config": {
