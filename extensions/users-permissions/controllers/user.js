@@ -13,4 +13,11 @@ module.exports = {
 
     return data;
   },
+  async findActive(activectx) {
+    const data = await strapi.plugins[
+      USER_PERMISSION_PLUGIN
+    ].services.user.fetchAll({ status_in: ["active", "block"] });
+
+    return data;
+  },
 };
