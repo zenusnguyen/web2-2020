@@ -21,7 +21,8 @@ module.exports = {
   async transferIntra(ctx) {
     // console.log("ctx: ", ctx.request.body);
     try {
-      const requestData = await ctx.request.body.data;
+      const requestData = await ctx.request.body;
+      console.log("requestData: ", requestData);
 
       const currentAccount = await strapi
         .query("spend-account")
@@ -32,7 +33,7 @@ module.exports = {
       });
 
       if (beneficiaryAccount == null) {
-        return ctx.badRequest("beneficiaryAccount not found");
+        return ctx.badRequest("Beneficiary account not found");
       }
 
       const transfer = await strapi.query("spend-account").update(
@@ -52,37 +53,33 @@ module.exports = {
       );
 
       // log transfer -
-      const transfer_log = await strapi.query("transfer-log").create({
-        source_account: requestData.currentAccount,
+      const transfer_log = await strapi.query("transaction-log").create({
+        card_id: currentAccount.id,
+        amount: requestData.amount,
+        account_id: currentAccount.account_id,
+        transaction_type: "transfer",
+        from_account: requestData.currentAccount,
         beneficiary_account: requestData.beneficiaryAccount,
         remark: requestData.remark,
+        remaining_balance:
+          parseInt(currentAccount.balance) + parseInt(requestData.amount),
         beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
-
-      const transaction_transfer = await strapi
-        .query("transaction-log")
-        .create({
-          transaction_type: "transfer",
-          amount: requestData.amount,
-          account_id: requestData.currentAccount,
-          log_detail: transfer_log.id,
-        });
-
-      // log transfer +
-      const deposit_log = await strapi.query("deposit-log").create({
-        fromAccount: requestData.currentAccount,
-        fromBank: requestData.sourceBank || "yellowBank",
-        toAccount: requestData.beneficiaryAccount,
-        toBank: requestData.beneficiaryBank || "yellowBank",
-      });
-      // console.log("deposit_log: ", deposit_log);
-      const transaction_deposit = await strapi.query("transaction-log").create({
-        transaction_type: "deposit",
+      console.log("transfer_log: ", transfer_log);
+      // log deposit +
+      const deposit_log = await strapi.query("transaction-log").create({
+        card_id: currentAccount.id,
         amount: requestData.amount,
-        account_id: requestData.beneficiaryAccount,
-        log_detail: deposit_log.id,
+        account_id: beneficiaryAccount.account_id,
+        transaction_type: "deposit",
+        from_account: requestData.currentAccount,
+        beneficiary_account: requestData.beneficiaryAccount,
+        remark: requestData.remark,
+        remaining_balance:
+          parseInt(beneficiaryAccount.balance) + parseInt(requestData.amount),
+        beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
-      // console.log("transaction_deposit: ", transaction_deposit);
+      console.log("deposit_log: ", deposit_log);
     } catch (error) {
       return ctx.badRequest(error.message);
     }

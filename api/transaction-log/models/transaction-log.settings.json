@@ -12,14 +12,26 @@
     "transaction_type": {
       "type": "string"
     },
-    "log_detail": {
-      "type": "integer"
-    },
     "account_id": {
       "type": "string"
     },
     "amount": {
       "type": "float"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "from_account": {
+      "type": "string"
+    },
+    "beneficiary_account": {
+      "type": "string"
+    },
+    "remaining_balance": {
+      "type": "float"
+    },
+    "card_id": {
+      "type": "string"
     }
   }
 }

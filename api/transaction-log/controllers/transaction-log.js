@@ -13,4 +13,13 @@ module.exports = {
 
     return data;
   },
+  async findByOwnerAccount(ctx) {
+    const data = await strapi.query("transaction-log").find({
+      account_id: ctx.query.account_id,
+    });
+
+    return data;
+  },
+
+
 };
