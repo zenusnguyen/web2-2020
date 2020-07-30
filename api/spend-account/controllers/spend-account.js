@@ -18,11 +18,43 @@ module.exports = {
 
     return data;
   },
+  async deposit(ctx) {
+    console.log("ctx: ", ctx.request.body);
+    const requestData = ctx.request.body;
+    const depositAccount = await strapi
+      .query("spend-account")
+      .findOne({ card_number: requestData.beneficiaryAccount });
+
+    const depositResult = await strapi.query("spend-account").update(
+      {
+        card_number: requestData.beneficiaryAccount,
+      },
+      {
+        balance:
+          parseInt(depositAccount.balance) + parseInt(requestData.amount),
+      }
+    );
+
+    // log deposit +
+    const deposit_log = await strapi.query("transaction-log").create({
+      card_id: depositAccount.id,
+      amount: requestData.amount,
+      account_id: depositAccount.account_id,
+      transaction_type: "deposit",
+      from_account: "admin",
+      beneficiary_account: requestData.beneficiaryAccount,
+      remark: requestData.remark,
+      remaining_balance:
+        parseInt(depositAccount.balance) + parseInt(requestData.amount),
+      beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
+    });
+
+    return "success";
+  },
   async transferIntra(ctx) {
     // console.log("ctx: ", ctx.request.body);
     try {
       const requestData = await ctx.request.body;
-      console.log("requestData: ", requestData);
 
       const currentAccount = await strapi
         .query("spend-account")

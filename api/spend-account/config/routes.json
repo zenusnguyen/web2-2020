@@ -31,7 +31,7 @@
       "config": {
         "policies": []
       }
-    },  
+    },
     {
       "method": "GET",
       "path": "/spend-accounts/:id",
@@ -48,6 +48,15 @@
         "policies": []
       }
     },
+    {
+      "method": "POST",
+      "path": "/spend-accounts-deposit",
+      "handler": "spend-account.deposit",
+      "config": {
+        "policies": []
+      }
+    },
+
     {
       "method": "POST",
       "path": "/spend-accounts-transfer-intra",

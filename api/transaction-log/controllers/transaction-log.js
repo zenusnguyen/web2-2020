@@ -14,12 +14,10 @@ module.exports = {
     return data;
   },
   async findByOwnerAccount(ctx) {
+    console.log('ctx: ', ctx);
     const data = await strapi.query("transaction-log").find({
-      account_id: ctx.query.account_id,
+      card_id: ctx.query.card_id,
     });
-
     return data;
   },
-
-
 };
