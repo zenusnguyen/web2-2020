@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transaction_log",
+  "info": {
+    "name": "transaction_log"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "transaction_type": {
+      "type": "string"
+    },
+    "account_id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "float"
+    },
+    "remark": {
+      "type": "string"
+    },
+    "from_account": {
+      "type": "string"
+    },
+    "beneficiary_account": {
+      "type": "string"
+    },
+    "remaining_balance": {
+      "type": "float"
+    },
+    "card_id": {
+      "type": "string"
+    }
+  }
+}

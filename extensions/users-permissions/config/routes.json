@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/users-unactive",
+      "handler": "user.findUnActive",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/users-active",
+      "handler": "user.findActive",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -15,10 +15,13 @@
     "account_id": {
       "type": "integer"
     },
-    "type": {
+    "spend_type": {
       "type": "integer"
     },
     "status": {
+      "type": "string"
+    },
+    "card_type": {
       "type": "string"
     },
     "created_date": {

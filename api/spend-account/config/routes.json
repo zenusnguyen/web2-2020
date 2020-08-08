@@ -9,9 +9,17 @@
       }
     },
     {
-      "method": "POST",
-      "path": "/spend-accounts/findByAccount",
-      "handler": "spend-account.findByAccount",
+      "method": "GET",
+      "path": "/spend-accounts-by-owneraccount",
+      "handler": "spend-account.findByOwner",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-accounts-findbycardid",
+      "handler": "spend-account.findByCardID",
       "config": {
         "policies": []
       }
@@ -36,6 +44,23 @@
       "method": "POST",
       "path": "/spend-accounts",
       "handler": "spend-account.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spend-accounts-deposit",
+      "handler": "spend-account.deposit",
+      "config": {
+        "policies": []
+      }
+    },
+
+    {
+      "method": "POST",
+      "path": "/spend-accounts-transfer-intra",
+      "handler": "spend-account.transferIntra",
       "config": {
         "policies": []
       }

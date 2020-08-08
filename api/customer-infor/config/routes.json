@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/customer-infors-change-password",
+      "handler": "customer-infor.changePass",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/customer-infors/:id",
       "handler": "customer-infor.update",
