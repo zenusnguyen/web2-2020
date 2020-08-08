@@ -14,7 +14,6 @@ module.exports = {
     return data;
   },
   async findByOwnerAccount(ctx) {
-    console.log("ctx: ", ctx);
     const data = await strapi.query("transaction-log").find({
       card_id: ctx.query.card_id,
     });

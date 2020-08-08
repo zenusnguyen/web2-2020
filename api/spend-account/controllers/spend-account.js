@@ -22,7 +22,7 @@ module.exports = {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: "anhnguyenviet998@gmail.com",
-        from: "zenusnguyen@gmail.com",
+        from: "web2020hcmus@gmail.com",
         subject: "Hello world",
         text: "Hello world",
         html: `<h4>Hello world</h4>`,
