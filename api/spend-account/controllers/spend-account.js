@@ -19,7 +19,18 @@ module.exports = {
     return data;
   },
   async deposit(ctx) {
-    console.log("ctx: ", ctx.request.body);
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: "anhnguyenviet998@gmail.com",
+        from: "zenusnguyen@gmail.com",
+        subject: "Hello world",
+        text: "Hello world",
+        html: `<h4>Hello world</h4>`,
+      });
+      console.log("sendMail: ", sendMail);
+    } catch (error) {
+      console.log("error: ", error);
+    }
     const requestData = ctx.request.body;
     const depositAccount = await strapi
       .query("spend-account")
