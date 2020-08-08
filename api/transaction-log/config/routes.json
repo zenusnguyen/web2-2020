@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/transaction-logs-filter",
+      "handler": "transaction-log.filter",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/transaction-logs",
       "handler": "transaction-log.create",
