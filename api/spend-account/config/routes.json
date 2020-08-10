@@ -50,6 +50,14 @@
     },
     {
       "method": "POST",
+      "path": "/spend-accounts-saving",
+      "handler": "spend-account.createSaving",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/spend-accounts-deposit",
       "handler": "spend-account.deposit",
       "config": {

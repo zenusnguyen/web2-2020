@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "term_deposit",
+  "info": {
+    "name": "term_deposit"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "beneficiary_account": {
+      "type": "string"
+    },
+    "interest_rate_id": {
+      "type": "integer"
+    },
+    "maturity_date": {
+      "type": "date"
+    },
+    "interest_money": {
+      "type": "float"
+    },
+    "final_settlement_type": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/term-deposits",
+      "handler": "term-deposit.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/term-deposits/count",
+      "handler": "term-deposit.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/term-deposits/:id",
+      "handler": "term-deposit.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/term-deposits",
+      "handler": "term-deposit.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/term-deposits/:id",
+      "handler": "term-deposit.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/term-deposits/:id",
+      "handler": "term-deposit.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
