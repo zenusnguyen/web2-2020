@@ -48,11 +48,7 @@ module.exports = {
               (period.period * 30),
         }
       );
-
-      console.log("Plus: ", Plus);
     });
-
-    console.log("1 minute later");
   },
 
   // renew savingAccount
