@@ -13,6 +13,7 @@ module.exports = {
 
   async createSaving(ctx) {
     const reqData = ctx.request.body;
+    console.log("reqData: ", reqData);
 
     const termDeposit = await strapi
       .query("term-deposit")
@@ -24,9 +25,8 @@ module.exports = {
             "M"
           )
           .toDate(),
-
         final_settlement_type: reqData.final_settlement_type,
-        beneficiary_account: reqData.beneficiaryAccount,
+        beneficiary_account: reqData.beneficiary_account,
       })
       .then(async function (data) {
         console.log("data: ", data.id);

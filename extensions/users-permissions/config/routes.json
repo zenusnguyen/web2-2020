@@ -15,6 +15,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/users-block",
+      "handler": "user.blockUser",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
