@@ -27,14 +27,14 @@ module.exports = {
           .toDate(),
         final_settlement_type: reqData.final_settlement_type,
         beneficiary_account: reqData.beneficiary_account,
+        origin_balance: 0,
       })
       .then(async function (data) {
-        console.log("data: ", data.id);
         const baseAcount = await strapi.query("spend-account").create({
           account_id: reqData.account_id,
           currency_unit: reqData.currency_unit,
           balance: 0,
-          status: "pending",
+          status: "active",
           card_type: reqData.card_type,
           card_number: reqData.card_number,
           term_deposit_id: data.id,
@@ -79,7 +79,19 @@ module.exports = {
           parseInt(depositAccount.balance) + parseInt(requestData.amount),
       }
     );
+    if (depositAccount.card_type === "saving") {
+      const term_deposit = await strapi
+        .query("term-deposit")
+        .findOne({ id: depositAccount.term_deposit_id });
 
+      const mappingBalance = await strapi.query("term-deposit").update(
+        { id: depositAccount.term_deposit_id },
+        {
+          origin_balance:
+            parseInt(depositAccount.balance) + parseInt(requestData.amount),
+        }
+      );
+    }
     // log deposit +
     const deposit_log = await strapi.query("transaction-log").create({
       card_id: depositAccount.id,
