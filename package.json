@@ -14,7 +14,7 @@
     "bcrypt": "^5.0.0",
     "knex": "<0.20.0",
     "moment": "^2.27.0",
-    "pg": "^8.2.1",
+    "pg": "^8.3.0",
     "react-alert-template-basic": "^1.0.0",
     "sqlite3": "latest",
     "strapi": "^3.0.5",
