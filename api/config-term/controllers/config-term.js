@@ -1,15 +1,28 @@
 "use strict";
-
+const _ = require("lodash");
 /**
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
 
-
 module.exports = {
   async updateTerm(ctx) {
-    console.log('ctx: ', ctx.request.body);
-   
+    const data = ctx.request.body.spendData;
+    console.log('data: ', data);
+    _.forEach(data, async (item) => {
+      console.log('item: ', item);
+      const result = await strapi.query("spend-account-type").update(
+        { id: item.id },
+        {
+          limited_amount_per_transaction: parseFloat(
+            item.limited_amount_per_transaction
+          ),
+          limited_amount_per_day: parseFloat(item.limited_amount_per_day),
+        }
+      );
+      console.log("result: ", result);
+    });
+
     return "success";
   },
 };
