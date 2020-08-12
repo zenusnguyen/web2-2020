@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spend_account_type",
+  "info": {
+    "name": "spend_account_type"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "type": {
+      "type": "string"
+    },
+    "limited_amount_per_transaction": {
+      "type": "float"
+    },
+    "limited_amount_per_day": {
+      "type": "float"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "spend_account",
+  "info": {
+    "name": "spend-account"
+  },
+  "attributes": {
+    "card_number": {
+      "type": "string"
+    },
+    "balance": {
+      "type": "float"
+    },
+    "account_id": {
+      "type": "integer"
+    },
+    "spend_type": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string"
+    },
+    "card_type": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "date"
+    },
+    "closed_date": {
+      "type": "date"
+    },
+    "currency_unit": {
+      "type": "string"
+    },
+    "term_deposit_id": {
+      "type": "integer"
+    },
+    "otp": {
+      "type": "string"
+    }
+  }
+}

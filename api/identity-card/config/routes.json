@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/identity-cards",
+      "handler": "identity-card.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/identity-cards/count",
+      "handler": "identity-card.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/identity-cards/:id",
+      "handler": "identity-card.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/identity-cards",
+      "handler": "identity-card.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/identity-cards/:id",
+      "handler": "identity-card.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/identity-cards/:id",
+      "handler": "identity-card.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

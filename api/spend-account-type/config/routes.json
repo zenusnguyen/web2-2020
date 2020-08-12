@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/spend-account-types",
+      "handler": "spend-account-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-account-types/count",
+      "handler": "spend-account-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-account-types/:id",
+      "handler": "spend-account-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spend-account-types",
+      "handler": "spend-account-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/spend-account-types/:id",
+      "handler": "spend-account-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/spend-account-types/:id",
+      "handler": "spend-account-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

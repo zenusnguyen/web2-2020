@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "post",
+      "path": "/getotp",
+      "handler": "email.sendMail",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

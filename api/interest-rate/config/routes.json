@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/interest-rates",
+      "handler": "interest-rate.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/interest-rates/count",
+      "handler": "interest-rate.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/interest-rates/:id",
+      "handler": "interest-rate.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/interest-rates",
+      "handler": "interest-rate.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/interest-rates/:id",
+      "handler": "interest-rate.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/interest-rates/:id",
+      "handler": "interest-rate.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

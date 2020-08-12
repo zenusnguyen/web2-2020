@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "post",
+      "path": "/update-term",
+      "handler": "config-term.updateTerm",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

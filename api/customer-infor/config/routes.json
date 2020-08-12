@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/customer-infors",
+      "handler": "customer-infor.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customer-infors/count",
+      "handler": "customer-infor.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/customer-infors",
+      "handler": "customer-infor.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/customer-infors-change-password",
+      "handler": "customer-infor.changePass",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/customer-infors/:id",
+      "handler": "customer-infor.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "account_log",
+  "info": {
+    "name": "account_log"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "action": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "status": {
+      "type": "integer"
+    },
+    "account_id": {
+      "type": "integer"
+    }
+  }
+}

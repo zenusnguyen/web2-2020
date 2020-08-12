@@ -1,0 +1,93 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/spend-accounts",
+      "handler": "spend-account.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-accounts-by-owneraccount",
+      "handler": "spend-account.findByOwner",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-accounts-findbycardid",
+      "handler": "spend-account.findByCardID",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-accounts/count",
+      "handler": "spend-account.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spend-accounts/:id",
+      "handler": "spend-account.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spend-accounts",
+      "handler": "spend-account.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spend-accounts-saving",
+      "handler": "spend-account.createSaving",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spend-accounts-deposit",
+      "handler": "spend-account.deposit",
+      "config": {
+        "policies": []
+      }
+    },
+
+    {
+      "method": "POST",
+      "path": "/spend-accounts-transfer-intra",
+      "handler": "spend-account.transferIntra",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/spend-accounts/:id",
+      "handler": "spend-account.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/spend-accounts/:id",
+      "handler": "spend-account.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
