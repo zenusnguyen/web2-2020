@@ -7,17 +7,33 @@
 
 module.exports = {
   async sendMail(email, otp) {
-    console.log("email,otp: ", email, otp);
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: email,
         from: "web2020hcmus@gmail.com",
-        subject: "Hello world",
-        text: `your otp is :${otp}`,
+        subject: "YELLOW BANKING",
+        text: ` You are trading your OTP code is :${otp}`,
       });
-      console.log("sendMail: ", sendMail);
-    } catch (error) {
-      console.log("error: ", error);
-    }
+    } catch (error) {}
+  },
+  async sendMailNotifyPlus(email, amount, reamingBalance) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "web2020hcmus@gmail.com",
+        subject: "YELLOW BANKING",
+        text: ` You are trading your OTP code is :${otp}`,
+      });
+    } catch (error) {}
+  },
+  async sendMailNotifyMinus(email, amount, reamingBalance) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "web2020hcmus@gmail.com",
+        subject: "YELLOW BANKING",
+        text: ` You are trading your OTP code is :${otp}`,
+      });
+    } catch (error) {}
   },
 };

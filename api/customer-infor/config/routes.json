@@ -33,9 +33,9 @@
       }
     },
     {
-      "method": "POST",
-      "path": "/customer-infors-change-password",
-      "handler": "customer-infor.changePass",
+      "method": "GET",
+      "path": "/customer-infors-find-cmnd",
+      "handler": "customer-infor.findCMND",
       "config": {
         "policies": []
       }

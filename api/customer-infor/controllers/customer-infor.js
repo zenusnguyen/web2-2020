@@ -6,15 +6,14 @@
  */
 
 module.exports = {
-  async changePass(ctx) {
-    console.log("ctx: ", ctx);
-    let entities;
-    // if (ctx.query._q) {
-    //   entities = await strapi.services.restaurant.search(ctx.query);
-    // } else {
-    //   entities = await strapi.services.restaurant.find(ctx.query);
-    // }
+  async findCMND(ctx) {
+    const identificationNumber = await ctx.query.identificationNumber;
+    console.log("identificationNumber: ", identificationNumber);
 
-    // return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.restaurant }));
+    const data = await strapi.query("customer-infor").findOne({
+      identificationNumber: identificationNumber,
+    });
+
+    return data || [];
   },
 };

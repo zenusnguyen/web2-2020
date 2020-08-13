@@ -11,15 +11,18 @@ module.exports = {
   async sendMail(ctx) {
     const otp = randomOTP();
     const data = ctx.request.body;
-    console.log('data: ', data);
-    await strapi.query("spend-account").update(
-      { card_number: data.card_number },
-      {
-        otp: otp,
-      }
-    );
-    const sendMail = await strapi.services.email.sendMail(data.email, otp);
+    try {
+      await strapi.query("spend-account").update(
+        { card_number: data.card_number },
+        {
+          otp: otp,
+        }
+      );
+      const sendMail = await strapi.services.email.sendMail(data.email, otp);
 
-    return otp;
+      return otp;
+    } catch (err) {
+      ctx.badRequest("Cannot send email");
+    }
   },
 };
