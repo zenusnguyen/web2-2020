@@ -28,6 +28,7 @@ module.exports = {
       transaction_type: ctx.query.type,
       created_at_gt: ctx.query.fromDate,
       created_at_lt: ctx.query.toDate,
+      account_id: ctx.query.account_id,
     });
     return data;
   },

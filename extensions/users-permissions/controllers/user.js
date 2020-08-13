@@ -20,7 +20,5 @@ module.exports = {
 
     return data;
   },
-  async blockUser(ctx) {
-    
-  },
+  async blockUser(ctx) {},
 };
