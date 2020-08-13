@@ -239,7 +239,7 @@ module.exports = {
         parseFloat(beneficiaryAccount.balance) + parseFloat(beneficiaryAmount),
         beneficiaryAccount.card_number
       );
-   
+
       // log deposit +
       const deposit_log = await strapi.query("transaction-log").create({
         unit: beneficiaryAccount.currency_unit,
@@ -255,6 +255,10 @@ module.exports = {
           parseFloat(beneficiaryAmount),
         beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
+
+      const clearOTP = await strapi
+        .query("spend-account")
+        .update({ id: currentAccount.id }, { otp: "" });
     } catch (error) {
       return ctx.badRequest(error.message);
     }
