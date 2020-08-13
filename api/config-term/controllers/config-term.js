@@ -8,9 +8,8 @@ const _ = require("lodash");
 module.exports = {
   async updateTerm(ctx) {
     const data = ctx.request.body.spendData;
-    console.log('data: ', data);
+
     _.forEach(data, async (item) => {
-      console.log('item: ', item);
       const result = await strapi.query("spend-account-type").update(
         { id: item.id },
         {
@@ -20,7 +19,6 @@ module.exports = {
           limited_amount_per_day: parseFloat(item.limited_amount_per_day),
         }
       );
-      console.log("result: ", result);
     });
 
     return "success";

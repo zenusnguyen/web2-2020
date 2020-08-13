@@ -22,7 +22,6 @@ module.exports = {
 
   async createSaving(ctx) {
     const reqData = ctx.request.body;
-    console.log("reqData: ", reqData);
 
     const termDeposit = await strapi
       .query("term-deposit")
@@ -30,7 +29,7 @@ module.exports = {
         interest_rate_id: reqData.interest_rate_id,
         maturity_date: moment()
           .add(
-            parseInt(ListTermDeposit[parseInt(reqData.interest_rate_id)]),
+            parseFloat(ListTermDeposit[parseFloat(reqData.interest_rate_id)]),
             "M"
           )
           .toDate(),
@@ -77,7 +76,7 @@ module.exports = {
   },
   async deposit(ctx) {
     const requestData = ctx.request.body.data;
-    console.log("requestData: ", requestData);
+
     const depositAccount = await strapi
       .query("spend-account")
       .findOne({ card_number: requestData.beneficiaryAccount });
@@ -88,7 +87,7 @@ module.exports = {
       },
       {
         balance:
-          parseInt(depositAccount.balance) + parseInt(requestData.amount),
+          parseFloat(depositAccount.balance) + parseFloat(requestData.amount),
       }
     );
     if (depositAccount.card_type === "saving") {
@@ -100,7 +99,7 @@ module.exports = {
         { id: depositAccount.term_deposit_id },
         {
           origin_balance:
-            parseInt(depositAccount.balance) + parseInt(requestData.amount),
+            parseFloat(depositAccount.balance) + parseFloat(requestData.amount),
         }
       );
     }
@@ -115,7 +114,7 @@ module.exports = {
       beneficiary_account: requestData.beneficiaryAccount,
       remark: requestData.remark,
       remaining_balance:
-        parseInt(depositAccount.balance) + parseInt(requestData.amount),
+        parseFloat(depositAccount.balance) + parseFloat(requestData.amount),
       beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
     });
 
@@ -124,7 +123,7 @@ module.exports = {
   async transferIntra(ctx) {
     try {
       const limitedTable = await strapi.query("spend-account-type").find();
-      console.log("limitedTable: ", limitedTable);
+
       const requestData = await ctx.request.body;
       let beneficiaryAmount = requestData.amount;
       let vndAmount = requestData.amount;
@@ -137,17 +136,15 @@ module.exports = {
         vndAmount = converToVND(requestData.amount);
       }
       if (currentAccount.otp != requestData.otp) {
-        console.log("invalid otp: ");
         return ctx.badRequest("invalid otp");
       }
-      console.log("currentAccount: ", currentAccount);
+
       const currentUser = await strapi.plugins[
         USER_PERMISSION_PLUGIN
       ].services.user.fetch({ id: currentAccount.account_id });
-      console.log("currentUser: ", currentUser);
 
       const limited = limitedTable[currentAccount.spend_type - 1];
-      console.log("limited: ", limited);
+
       const currentDate = new Date(
         new Date().getFullYear().toString(),
         new Date().getMonth().toString(),
@@ -168,26 +165,21 @@ module.exports = {
       });
       if (currentAccount.currency_unit != "VND") {
         totalTransaction = converToVND(totalTransaction);
-        console.log("totalTransaction: ", totalTransaction);
       }
 
       if (
         limited.limited_amount_per_transaction < vndAmount ||
         totalTransaction + vndAmount > limited.limited_amount_per_day
       ) {
-        console.log("Limted Transaction");
-        // return ctx.throw(400, "Limted Transaction");
         return ctx.badRequest("Limted Transaction");
       }
       const beneficiaryAccount = await strapi.query("spend-account").findOne({
         card_number: requestData.beneficiaryAccount.toString(),
       });
-      console.log("currentUser: ", currentUser);
+
       const beneficiaryUser = await strapi.plugins[
         USER_PERMISSION_PLUGIN
-      ].services.user.fetchAll({ id: beneficiaryAccount.account_id });
-
-      console.log("beneficiaryUser: ", beneficiaryUser);
+      ].services.user.fetch({ id: beneficiaryAccount.account_id });
 
       if (beneficiaryAccount == null) {
         return ctx.badRequest("Beneficiary account not found");
@@ -205,7 +197,7 @@ module.exports = {
         { id: currentAccount.id },
         {
           balance:
-            parseInt(currentAccount.balance) - parseInt(requestData.amount),
+            parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
         }
       );
 
@@ -213,8 +205,16 @@ module.exports = {
         { id: beneficiaryAccount.id },
         {
           balance:
-            parseInt(beneficiaryAccount.balance) + parseInt(beneficiaryAmount),
+            parseFloat(beneficiaryAccount.balance) +
+            parseFloat(beneficiaryAmount),
         }
+      );
+
+      const notificationTranfer = await strapi.services.email.sendMailNotifyMinus(
+        currentUser.email,
+        requestData.amount,
+        parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
+        requestData.currentAccount
       );
 
       // log transfer -
@@ -228,10 +228,18 @@ module.exports = {
         beneficiary_account: requestData.beneficiaryAccount,
         remark: requestData.remark,
         remaining_balance:
-          parseInt(currentAccount.balance) - parseInt(requestData.amount),
+          parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
         beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
-      console.log("transfer_log: ", transfer_log);
+
+      const notificationDeposit = await strapi.services.email.sendMailNotifyPlus(
+        beneficiaryUser.email,
+
+        beneficiaryAmount,
+        parseFloat(beneficiaryAccount.balance) + parseFloat(beneficiaryAmount),
+        beneficiaryAccount.card_number
+      );
+   
       // log deposit +
       const deposit_log = await strapi.query("transaction-log").create({
         unit: beneficiaryAccount.currency_unit,
@@ -243,7 +251,8 @@ module.exports = {
         beneficiary_account: requestData.beneficiaryAccount,
         remark: requestData.remark,
         remaining_balance:
-          parseInt(beneficiaryAccount.balance) + parseInt(beneficiaryAmount),
+          parseFloat(beneficiaryAccount.balance) +
+          parseFloat(beneficiaryAmount),
         beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
       });
     } catch (error) {

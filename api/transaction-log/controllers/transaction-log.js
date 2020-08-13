@@ -14,7 +14,6 @@ module.exports = {
     return data;
   },
   async findByOwnerAccount(ctx) {
-    console.log("ctx: ", ctx.query);
     const data = await strapi.query("transaction-log").find({
       card_id: ctx.query.id,
     });
@@ -34,7 +33,6 @@ module.exports = {
   },
 
   async filterByAccount(ctx) {
-    console.log("ctx: ", ctx.query);
     if (ctx.query.type === "all") {
       ctx.query.type = null;
     }
@@ -44,7 +42,7 @@ module.exports = {
       created_at_lt: ctx.query.toDate,
       card_id: ctx.query.accountNumber,
     });
-    console.log("data: ", data);
+
     return data;
   },
 };

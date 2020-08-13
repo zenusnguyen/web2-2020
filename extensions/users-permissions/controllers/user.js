@@ -21,11 +21,6 @@ module.exports = {
     return data;
   },
   async blockUser(ctx) {
-    // console.log("ctx: ", ctx.query.user_id);
-    // const data = await strapi.plugins[
-    //   USER_PERMISSION_PLUGIN
-    // ].services.user.add({ id: ctx.query.user_id }, { status: "block" });
-    // console.log("data: ", data);
-    // return data;
+    
   },
 };

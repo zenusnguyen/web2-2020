@@ -8,7 +8,6 @@
 module.exports = {
   async findCMND(ctx) {
     const identificationNumber = await ctx.query.identificationNumber;
-    console.log("identificationNumber: ", identificationNumber);
 
     const data = await strapi.query("customer-infor").findOne({
       identificationNumber: identificationNumber,
