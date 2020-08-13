@@ -67,7 +67,8 @@ module.exports = {
     return data;
   },
   async deposit(ctx) {
-    const requestData = ctx.request.body;
+    const requestData = ctx.request.body.data;
+    console.log('requestData: ', requestData);
     const depositAccount = await strapi
       .query("spend-account")
       .findOne({ card_number: requestData.beneficiaryAccount });
@@ -114,6 +115,7 @@ module.exports = {
   async transferIntra(ctx) {
     try {
       const requestData = await ctx.request.body;
+      console.log('requestData: ', requestData);
 
       const currentAccount = await strapi
         .query("spend-account")
