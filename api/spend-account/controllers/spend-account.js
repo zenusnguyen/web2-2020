@@ -187,9 +187,9 @@ module.exports = {
 
       if (beneficiaryAccount.currency_unit != currentAccount.currentAccount) {
         if (beneficiaryAccount.currency_unit == "USD") {
-          beneficiaryAmount = converToUSD(requestData.amount);
+          beneficiaryAmount = converToUSD(vndAmount);
         } else {
-          beneficiaryAmount = converToVND(requestData.amount);
+          beneficiaryAmount = vndAmount;
         }
       }
 
