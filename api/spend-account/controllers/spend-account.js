@@ -264,4 +264,112 @@ module.exports = {
     }
     return "success";
   },
+
+  async transferFromSaving(ctx) {
+    try {
+      // const limitedTable = await strapi.query("spend-account-type").find();
+
+      const requestData = await ctx.request.body;
+      let beneficiaryAmount = requestData.amount;
+      let vndAmount = requestData.amount;
+
+      const currentAccount = await strapi
+        .query("spend-account")
+        .findOne({ card_number: requestData.currentAccount.toString() });
+
+      if (currentAccount.currency_unit != "VND") {
+        vndAmount = converToVND(requestData.amount);
+      }
+     
+
+      const currentUser = await strapi.plugins[
+        USER_PERMISSION_PLUGIN
+      ].services.user.fetch({ id: currentAccount.account_id });
+
+      const beneficiaryAccount = await strapi.query("spend-account").findOne({
+        card_number: requestData.beneficiaryAccount.toString(),
+      });
+
+      const beneficiaryUser = await strapi.plugins[
+        USER_PERMISSION_PLUGIN
+      ].services.user.fetch({ id: beneficiaryAccount.account_id });
+
+      if (beneficiaryAccount == null) {
+        return ctx.badRequest("Beneficiary account not found");
+      }
+
+      if (beneficiaryAccount.currency_unit != currentAccount.currentAccount) {
+        if (beneficiaryAccount.currency_unit == "USD") {
+          beneficiaryAmount = converToUSD(vndAmount);
+        } else {
+          beneficiaryAmount = vndAmount;
+        }
+      }
+
+      const transfer = await strapi.query("spend-account").update(
+        { id: currentAccount.id },
+        {
+          balance:
+            parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
+        }
+      );
+
+      const deposit = await strapi.query("spend-account").update(
+        { id: beneficiaryAccount.id },
+        {
+          balance:
+            parseFloat(beneficiaryAccount.balance) +
+            parseFloat(beneficiaryAmount),
+        }
+      );
+
+      const notificationTranfer = await strapi.services.email.sendMailNotifyMinus(
+        currentUser.email,
+        requestData.amount,
+        parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
+        requestData.currentAccount
+      );
+
+      // log transfer -
+      const transfer_log = await strapi.query("transaction-log").create({
+        unit: currentAccount.currency_unit,
+        card_id: currentAccount.id,
+        amount: requestData.amount,
+        account_id: currentAccount.account_id,
+        transaction_type: "transfer",
+        from_account: requestData.currentAccount,
+        beneficiary_account: requestData.beneficiaryAccount,
+        remark: requestData.remark,
+        remaining_balance:
+          parseFloat(currentAccount.balance) - parseFloat(requestData.amount),
+        beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
+      });
+
+      const notificationDeposit = await strapi.services.email.sendMailNotifyPlus(
+        beneficiaryUser.email,
+        beneficiaryAmount,
+        parseFloat(beneficiaryAccount.balance) + parseFloat(beneficiaryAmount),
+        beneficiaryAccount.card_number
+      );
+
+      // log deposit +
+      const deposit_log = await strapi.query("transaction-log").create({
+        unit: beneficiaryAccount.currency_unit,
+        card_id: beneficiaryAccount.id,
+        amount: beneficiaryAmount,
+        account_id: beneficiaryAccount.account_id,
+        transaction_type: "deposit",
+        from_account: requestData.currentAccount,
+        beneficiary_account: requestData.beneficiaryAccount,
+        remark: requestData.remark,
+        remaining_balance:
+          parseFloat(beneficiaryAccount.balance) +
+          parseFloat(beneficiaryAmount),
+        beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
+      });
+    } catch (error) {
+      return ctx.badRequest(error.message);
+    }
+    return "success";
+  },
 };
