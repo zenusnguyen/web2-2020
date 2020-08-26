@@ -181,8 +181,11 @@ module.exports = {
         USER_PERMISSION_PLUGIN
       ].services.user.fetch({ id: beneficiaryAccount.account_id });
 
-      if (beneficiaryAccount == null) {
-        return ctx.badRequest("Beneficiary account not found");
+      if (
+        beneficiaryAccount == null ||
+        beneficiaryAccount.status !== "active"
+      ) {
+        return ctx.badRequest("Beneficiary account invalid");
       }
 
       if (beneficiaryAccount.currency_unit != currentAccount.currentAccount) {
@@ -280,7 +283,6 @@ module.exports = {
       if (currentAccount.currency_unit != "VND") {
         vndAmount = converToVND(requestData.amount);
       }
-     
 
       const currentUser = await strapi.plugins[
         USER_PERMISSION_PLUGIN
