@@ -25,4 +25,16 @@ module.exports = {
       ctx.badRequest("Cannot send email");
     }
   },
+  async sendMailVerify(ctx) {
+    const otp = randomOTP();
+    console.log('otp: ', otp);
+    const data = ctx.request.body;
+    try {
+      const sendMail = await strapi.services.email.sendMailVerify(data.email, otp);
+      
+      return otp;
+    } catch (err) {
+      ctx.badRequest("Cannot send email");
+    }
+  },
 };
