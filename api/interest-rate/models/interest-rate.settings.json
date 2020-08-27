@@ -7,7 +7,7 @@
   },
   "attributes": {
     "period": {
-      "type": "integer"
+      "type": "string"
     },
     "interest_rate": {
       "type": "float"
