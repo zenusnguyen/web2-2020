@@ -1,7 +1,7 @@
 "use strict";
 // const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 const moment = require("moment");
-const ListTermDeposit = [0, 1, 3, 6, 12, 18, 24, 36];
+const ListTermDeposit = [0, 1, 3, 6, 12, 18, 24, 36, 1200];
 const _ = require("lodash");
 const converToVND = (amout) => {
   return amout * 25000;
@@ -280,7 +280,6 @@ module.exports = {
       if (currentAccount.currency_unit != "VND") {
         vndAmount = converToVND(requestData.amount);
       }
-     
 
       const currentUser = await strapi.plugins[
         USER_PERMISSION_PLUGIN

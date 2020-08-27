@@ -31,8 +31,7 @@ module.exports = {
         {
           balance:
             saving.balance +
-            (rate.origin_balance * (period.interest_rate / 100)) /
-              (period.period * 30),
+            (rate.origin_balance * (period.interest_rate / 100)) / 365,
         }
       );
     });
