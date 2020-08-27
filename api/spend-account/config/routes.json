@@ -66,6 +66,16 @@
     },
     {
       "method": "POST",
+      "path": "/spend-accounts-withdraw",
+      "handler": "spend-account.withdraw",
+      "config": {
+        "policies": []
+      }
+    },
+
+  
+    {
+      "method": "POST",
       "path": "/spend-accounts-fromsaving",
       "handler": "spend-account.transferFromSaving",
       "config": {

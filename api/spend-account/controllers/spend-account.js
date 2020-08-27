@@ -374,4 +374,52 @@ module.exports = {
     }
     return "success";
   },
+
+  async withdraw(ctx) {
+    const requestData = ctx.request.body.data;
+    console.log("requestData: ", requestData);
+
+    const depositAccount = await strapi.query("spend-account").findOne({
+      card_number: requestData.beneficiaryAccount,
+    });
+    console.log("depositAccount: ", depositAccount);
+    const depositResult = await strapi.query("spend-account").update(
+      {
+        card_number: requestData.beneficiaryAccount,
+      },
+      {
+        balance:
+          parseFloat(depositAccount.balance) - parseFloat(requestData.amount),
+      }
+    );
+    if (depositAccount.card_type === "saving") {
+      const term_deposit = await strapi
+        .query("term-deposit")
+        .findOne({ id: depositAccount.term_deposit_id });
+
+      const mappingBalance = await strapi.query("term-deposit").update(
+        { id: depositAccount.term_deposit_id },
+        {
+          origin_balance:
+            parseFloat(depositAccount.balance) - parseFloat(requestData.amount),
+        }
+      );
+    }
+    // log deposit +
+    const deposit_log = await strapi.query("transaction-log").create({
+      unit: depositAccount.currency_unit,
+      card_id: depositAccount.id,
+      amount: requestData.amount,
+      account_id: depositAccount.account_id,
+      transaction_type: "withdraw",
+      from_account: "admin",
+      beneficiary_account: requestData.beneficiaryAccount,
+      remark: requestData.remark,
+      remaining_balance:
+        parseFloat(depositAccount.balance) - parseFloat(requestData.amount),
+      beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
+    });
+
+    return "success";
+  },
 };
