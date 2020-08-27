@@ -9,6 +9,7 @@ module.exports = {
   async findByOwner(ctx) {
     const data = await strapi.query("transaction-log").find({
       account_id: ctx.query.account_id,
+      _sort: "id:desc",
     });
 
     return data;
@@ -16,6 +17,7 @@ module.exports = {
   async findByOwnerAccount(ctx) {
     const data = await strapi.query("transaction-log").find({
       card_id: ctx.query.id,
+      _sort: "id:desc",
     });
     return data;
   },
@@ -29,6 +31,7 @@ module.exports = {
       created_at_gt: ctx.query.fromDate,
       created_at_lt: ctx.query.toDate,
       account_id: ctx.query.account_id,
+      _sort: "id:desc",
     });
     return data;
   },
@@ -42,6 +45,7 @@ module.exports = {
       created_at_gt: ctx.query.fromDate,
       created_at_lt: ctx.query.toDate,
       card_id: ctx.query.accountNumber,
+      _sort: "id:desc",
     });
 
     return data;

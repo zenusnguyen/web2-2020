@@ -16,6 +16,16 @@ module.exports = {
       });
     } catch (error) {}
   },
+  async sendMailVerify(email, otp) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "web2020hcmus@gmail.com",
+        subject: "YELLOW BANKING",
+        text: ` You are create new account your OTP code is :${otp}`,
+      });
+    } catch (error) {}
+  },
   async sendMailNotifyPlus(email, amount, reamingBalance, accountNumber) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
