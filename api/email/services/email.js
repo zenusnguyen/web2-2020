@@ -40,6 +40,40 @@ module.exports = {
       return sendMail;
     } catch (error) {}
   },
+
+  async sendMailNotifyDeposit(email, amount, reamingBalance, accountNumber) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "web2020hcmus@gmail.com",
+        subject: "YELLOW BANKING",
+        text: ` Your account ${accountNumber} have just made a  deposit amount :${amount} 
+        Your reaming balance is : ${reamingBalance}
+  `,
+      });
+
+      return sendMail;
+    } catch (error) {}
+  },
+
+  async sendMailNotifyWithdraw(email, amount, reamingBalance, accountNumber) {
+    console.log('email, amount, reamingBalance, accountNumber: ', email, amount, reamingBalance, accountNumber);
+   console.log("loggg");
+   
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "web2020hcmus@gmail.com",
+        subject: "YELLOW BANKING",
+        text: ` Your account ${accountNumber} have just made a withdraw amount :${amount} 
+        Your reaming balance is : ${reamingBalance}
+  `,
+      });
+
+      return sendMail;
+    } catch (error) {}
+  },
+
   async sendMailNotifyMinus(email, amount, reamingBalance, accountNumber) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({

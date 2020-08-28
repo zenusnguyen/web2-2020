@@ -118,6 +118,17 @@ module.exports = {
       beneficiary_bank: requestData.beneficiaryBank || "yellowBank",
     });
 
+    const depositUSer = await strapi.plugins[
+      USER_PERMISSION_PLUGIN
+    ].services.user.fetch({ id: depositAccount.account_id });
+    const notificationDeposit = await strapi.services.email.sendMailNotifyDeposit(
+      depositUSer.email,
+
+      requestData.amount,
+      parseFloat(depositAccount.balance) + parseFloat(requestData.amount),
+      requestData.beneficiaryAccount
+    );
+    console.log("notificationDeposit: ", notificationDeposit);
     return "success";
   },
   async transferIntra(ctx) {
@@ -382,7 +393,11 @@ module.exports = {
     const depositAccount = await strapi.query("spend-account").findOne({
       card_number: requestData.beneficiaryAccount,
     });
-    console.log("depositAccount: ", depositAccount);
+
+    const depositUSer = await strapi.plugins[
+      USER_PERMISSION_PLUGIN
+    ].services.user.fetch({ id: depositAccount.account_id });
+
     const depositResult = await strapi.query("spend-account").update(
       {
         card_number: requestData.beneficiaryAccount,
@@ -405,6 +420,14 @@ module.exports = {
         }
       );
     }
+    const notificationDeposit = await strapi.services.email.sendMailNotifyWithdraw(
+      depositUSer.email,
+
+      requestData.amount,
+      parseFloat(depositAccount.balance) - parseFloat(requestData.amount),
+      depositAccount.card_number
+    );
+    console.log("notificationDeposit: ", notificationDeposit);
     // log deposit +
     const deposit_log = await strapi.query("transaction-log").create({
       unit: depositAccount.currency_unit,
